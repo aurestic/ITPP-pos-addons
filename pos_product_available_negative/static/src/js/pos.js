@@ -119,7 +119,7 @@ odoo.define("pos_product_available_negative.pos", function (require) {
     screens.OrderWidget.include({
         set_value: function (val) {
             if (!this.pos.config.negative_order_warning) {
-                this._super();
+                this._super(val);
                 return;
             }
             var order = this.pos.get_order();
@@ -128,6 +128,7 @@ odoo.define("pos_product_available_negative.pos", function (require) {
             }
             var mode = this.numpad_state.get("mode");
             if (mode !== "quantity") {
+                this._super(val);
                 return;
             }
             var selected_orderline = order.get_selected_orderline();
